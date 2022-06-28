@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "BandGlassProgramme.Windows": {
+      "commandName": "MsixPackage"
+    }
+  }
+}

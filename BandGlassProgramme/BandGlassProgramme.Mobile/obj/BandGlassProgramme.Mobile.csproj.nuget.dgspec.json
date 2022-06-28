@@ -1,0 +1,113 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\natev\\source\\repos\\UIdahoBandGlassesProgramme\\BandGlassProgramme\\BandGlassProgramme.Mobile\\BandGlassProgramme.Mobile.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\natev\\source\\repos\\UIdahoBandGlassesProgramme\\BandGlassProgramme\\BandGlassProgramme.Mobile\\BandGlassProgramme.Mobile.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\natev\\source\\repos\\UIdahoBandGlassesProgramme\\BandGlassProgramme\\BandGlassProgramme.Mobile\\BandGlassProgramme.Mobile.csproj",
+        "projectName": "BandGlassProgramme.Mobile",
+        "projectPath": "C:\\Users\\natev\\source\\repos\\UIdahoBandGlassesProgramme\\BandGlassProgramme\\BandGlassProgramme.Mobile\\BandGlassProgramme.Mobile.csproj",
+        "packagesPath": "C:\\Users\\natev\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\natev\\source\\repos\\UIdahoBandGlassesProgramme\\BandGlassProgramme\\BandGlassProgramme.Mobile\\obj\\",
+        "projectStyle": "PackageReference",
+        "crossTargeting": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\natev\\source\\repos\\UIdahoBandGlassesProgramme\\NuGet.Config",
+          "C:\\Users\\natev\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0-maccatalyst"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/azure-public/vside/_packaging/xamarin-impl/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-public/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet6/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0-maccatalyst15.4": {
+            "targetAlias": "net6.0-maccatalyst",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0-maccatalyst15.4": {
+          "targetAlias": "net6.0-maccatalyst",
+          "dependencies": {
+            "Microsoft.Extensions.Logging": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.Extensions.Logging.Console": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "System.Runtime.InteropServices.NFloat.Internal": {
+              "target": "Package",
+              "version": "[6.0.1, )",
+              "autoReferenced": true
+            },
+            "Uno.Extensions.Logging.OSLog": {
+              "target": "Package",
+              "version": "[1.4.0, )"
+            },
+            "Uno.UI.Adapter.Microsoft.Extensions.Logging": {
+              "target": "Package",
+              "version": "[4.3.8, )"
+            },
+            "Uno.WinUI": {
+              "target": "Package",
+              "version": "[4.3.8, )"
+            },
+            "Uno.WinUI.RemoteControl": {
+              "target": "Package",
+              "version": "[4.3.8, )"
+            }
+          },
+          "imports": [
+            "xamarinios10",
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.MacCatalyst": {
+              "privateAssets": "all"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400-preview.22301.10\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "maccatalyst-x64": {
+          "#import": []
+        }
+      }
+    }
+  }
+}
