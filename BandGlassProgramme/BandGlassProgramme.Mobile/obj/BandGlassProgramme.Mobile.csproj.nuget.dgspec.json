@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\natev\\source\\repos\\UIdahoBandGlassesProgramme\\BandGlassProgramme\\BandGlassProgramme.Mobile\\BandGlassProgramme.Mobile.csproj": {}
+    "C:\\Users\\natev\\Source\\Repos\\UIdahoBandGlassesProgramme\\BandGlassProgramme\\BandGlassProgramme.Mobile\\BandGlassProgramme.Mobile.csproj": {}
   },
   "projects": {
-    "C:\\Users\\natev\\source\\repos\\UIdahoBandGlassesProgramme\\BandGlassProgramme\\BandGlassProgramme.Mobile\\BandGlassProgramme.Mobile.csproj": {
+    "C:\\Users\\natev\\Source\\Repos\\UIdahoBandGlassesProgramme\\BandGlassProgramme\\BandGlassProgramme.Mobile\\BandGlassProgramme.Mobile.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\natev\\source\\repos\\UIdahoBandGlassesProgramme\\BandGlassProgramme\\BandGlassProgramme.Mobile\\BandGlassProgramme.Mobile.csproj",
+        "projectUniqueName": "C:\\Users\\natev\\Source\\Repos\\UIdahoBandGlassesProgramme\\BandGlassProgramme\\BandGlassProgramme.Mobile\\BandGlassProgramme.Mobile.csproj",
         "projectName": "BandGlassProgramme.Mobile",
-        "projectPath": "C:\\Users\\natev\\source\\repos\\UIdahoBandGlassesProgramme\\BandGlassProgramme\\BandGlassProgramme.Mobile\\BandGlassProgramme.Mobile.csproj",
+        "projectPath": "C:\\Users\\natev\\Source\\Repos\\UIdahoBandGlassesProgramme\\BandGlassProgramme\\BandGlassProgramme.Mobile\\BandGlassProgramme.Mobile.csproj",
         "packagesPath": "C:\\Users\\natev\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\natev\\source\\repos\\UIdahoBandGlassesProgramme\\BandGlassProgramme\\BandGlassProgramme.Mobile\\obj\\",
         "projectStyle": "PackageReference",
@@ -18,7 +18,7 @@
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\natev\\source\\repos\\UIdahoBandGlassesProgramme\\NuGet.Config",
+          "C:\\Users\\natev\\Source\\Repos\\UIdahoBandGlassesProgramme\\NuGet.Config",
           "C:\\Users\\natev\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"

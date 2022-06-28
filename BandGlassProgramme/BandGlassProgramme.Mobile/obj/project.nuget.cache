@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "TvoototiQZxMSITJhQe2ixrsdJHyEOotftFc7m+gUdWmMiss4HA2vtlZ4bBH41vg3f3O8Vm4YF49kHvfZqgc2g==",
+  "dgSpecHash": "b1TJIIZ2N39CnSL68bhi2jMCkvecdR/XCAIr3K9PTONeRInImuLG9desLIiLDal5z/x3vgK6nmja3SfVcnCp3g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\natev\\source\\repos\\UIdahoBandGlassesProgramme\\BandGlassProgramme\\BandGlassProgramme.Mobile\\BandGlassProgramme.Mobile.csproj",
+  "projectFilePath": "C:\\Users\\natev\\Source\\Repos\\UIdahoBandGlassesProgramme\\BandGlassProgramme\\BandGlassProgramme.Mobile\\BandGlassProgramme.Mobile.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\natev\\.nuget\\packages\\commonservicelocator\\2.0.5\\commonservicelocator.2.0.5.nupkg.sha512",
     "C:\\Users\\natev\\.nuget\\packages\\microsoft.extensions.configuration\\5.0.0\\microsoft.extensions.configuration.5.0.0.nupkg.sha512",

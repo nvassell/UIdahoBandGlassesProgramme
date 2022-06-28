@@ -1,2 +1,2 @@
 # UIdahoBandGlassesProgramme
-Program used to read/write UIdaho Band Glasses formations
+Program used for reading/writing University of Idaho band glasses formations!

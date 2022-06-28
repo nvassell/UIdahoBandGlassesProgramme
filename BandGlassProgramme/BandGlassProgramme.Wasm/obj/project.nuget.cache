@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "f4B0lMrIOR7kbyNpvzuYE8XoE9OOt5XROUdr+CDZEEm5sn3bsV1e3/t1uJjkYnPYWRnvC3bfoD2QmgvCKivZpA==",
+  "dgSpecHash": "cTgVKD/Nj0GXpRMvCp6vjsNrBA5bZPCxCvAx0+OWfpVBBxYlL/LW32kdfh/DyHx9Rols/EsF84XSOqbVrlNTCQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\natev\\source\\repos\\UIdahoBandGlassesProgramme\\BandGlassProgramme\\BandGlassProgramme.Wasm\\BandGlassProgramme.Wasm.csproj",
+  "projectFilePath": "C:\\Users\\natev\\Source\\Repos\\UIdahoBandGlassesProgramme\\BandGlassProgramme\\BandGlassProgramme.Wasm\\BandGlassProgramme.Wasm.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\natev\\.nuget\\packages\\commonservicelocator\\2.0.5\\commonservicelocator.2.0.5.nupkg.sha512",
     "C:\\Users\\natev\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\5.0.0\\microsoft.extensions.dependencyinjection.5.0.0.nupkg.sha512",

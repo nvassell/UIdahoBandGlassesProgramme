@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "88zwc1ajtBCQXNG/n0a4xiYxaM4gdp2uYZuKyn4auWI4KE5dGUoZ7VWdL5CDLMNHVTvXvtQMhZiAPhrWdcZheA==",
+  "dgSpecHash": "Kh3DuspeyskIYgTWQARb14gX9RLRn8eaF3TDEdhkPVN1doQ69aK2HSfgVdZClPmBSRiVHvY5pwnCIifgTw/bpQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\natev\\source\\repos\\UIdahoBandGlassesProgramme\\BandGlassProgramme\\BandGlassProgramme.Skia.Gtk\\BandGlassProgramme.Skia.Gtk.csproj",
+  "projectFilePath": "C:\\Users\\natev\\Source\\Repos\\UIdahoBandGlassesProgramme\\BandGlassProgramme\\BandGlassProgramme.Skia.Gtk\\BandGlassProgramme.Skia.Gtk.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\natev\\.nuget\\packages\\atksharp\\3.24.24.34\\atksharp.3.24.24.34.nupkg.sha512",
     "C:\\Users\\natev\\.nuget\\packages\\cairosharp\\3.24.24.34\\cairosharp.3.24.24.34.nupkg.sha512",
