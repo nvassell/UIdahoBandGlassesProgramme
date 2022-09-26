@@ -1,23 +1,13 @@
 ﻿@page "/"
 @inject HttpClient Http
-@using System;
-@using System.IO;
- 
 
-@*@if (defaultSettings == null)
-{
-    <p>Loading...</p>
-}
-else
-{
-    <p>@defaultSettings.numRows</p>
-}*@
+
+<InputFile OnChange="@LoadFiles" multiple />
 
 @code {
-    private DefaultLayoutModel defaultSettings;
-
-    protected override async Task OnInitializedAsync()
-    
-        defaultSettings = await Http.GetFromJsonAsync<DefaultLayoutModel> ?("wwwroot/Settings.json");
+    private void LoadFiles(InputFileChangeEventArgs e)
+    {
+            
     }
 }
+
