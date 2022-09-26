@@ -1,0 +1,8 @@
+{
+    "numRows": 5,
+    "numColumns": 5,
+    "participantList": [
+        "Joe Vandal"
+    ],
+    "customLayoutDirectory": "./Custom_Layouts/"
+}
