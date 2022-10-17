@@ -1,13 +1,19 @@
 ﻿@page "/"
 @inject HttpClient Http
 
+<p>@settings.customLayoutDirectory</p>
+<p>Number of files: @files</p>
+
 @code {
     private DefaultLayoutModel settings = new DefaultLayoutModel();
+    private List<CustomLayoutModel> customLayouts = new List<CustomLayoutModel>();
+    string[] files = { };
 
     protected override async Task OnInitializedAsync()
     {
         //settings = await Http.GetJsonAsync<DefaultLayoutModel>("wwwroot/.vbgp/Settings.json");
         settings = await Http.GetFromJsonAsync<DefaultLayoutModel?>(".vbgp/Settings.json");
-        await Http.PostJsonAsync(".vbgp/Settings.json", settings);
+        var customLayoutDirectory = settings.customLayoutDirectory;
+
     }
 }

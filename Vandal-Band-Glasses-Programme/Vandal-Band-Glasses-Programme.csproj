@@ -21,5 +21,6 @@
   <ItemGroup>
     <None Include="wwwroot\.vbgp\Custom_Layouts\SickLayout.json" />
     <None Include="wwwroot\.vbgp\Settings.json" />
+    <None Include="wwwroot\.vbgp\Custom_Layouts\SickLayout2.json" />
   </ItemGroup>
 </Project>

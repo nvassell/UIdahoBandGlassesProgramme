@@ -4,5 +4,5 @@
   "participantList": [
     "Joe Vandal"
   ],
-  "customLayoutDirectory": "./Custom_Layouts/"
+  "customLayoutDirectory": "/Custom_Layouts/"
 }
