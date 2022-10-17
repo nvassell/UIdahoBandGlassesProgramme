@@ -1,21 +1,13 @@
 ﻿@page "/"
-@using static System.Net.WebRequestMethods
-
-@*<FileUpload />*@
+@inject HttpClient Http
 
 @code {
+    private DefaultLayoutModel settings = new DefaultLayoutModel();
 
     protected override async Task OnInitializedAsync()
     {
-        DefaultLayoutModel defaultLayout = await Http("Settings.json");
+        //settings = await Http.GetJsonAsync<DefaultLayoutModel>("wwwroot/.vbgp/Settings.json");
+        settings = await Http.GetFromJsonAsync<DefaultLayoutModel?>(".vbgp/Settings.json");
+        await Http.PostJsonAsync(".vbgp/Settings.json", settings);
     }
 }
-
-
-@*HttpResponseMessage response = await client.GetAsync("Products");
-//get data as Json string 
-string data = await response.Content.ReadAsStringAsync();
-//use JavaScriptSerializer from System.Web.Script.Serialization
-JavaScriptSerializer JSserializer = new JavaScriptSerializer();
-//deserialize to your class
-products = JSserializer.Deserialize<List<Product>>(data);*@

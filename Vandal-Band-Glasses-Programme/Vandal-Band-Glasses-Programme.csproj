@@ -7,14 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="wwwroot\.vdbp\Custom_Layouts\SickLayout.json" />
-    <Content Include="wwwroot\.vdbp\Settings.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.9" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="MudBlazor" Version="6.0.16" />
+	 <PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="3.0.0-preview8.19405.7" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
