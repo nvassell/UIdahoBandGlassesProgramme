@@ -2,7 +2,12 @@
   "numRows": 5,
   "numColumns": 5,
   "participantList": [
-    "Joe Vandal"
+    "Joe Vandal",
+    "Joeleen Vandal",
+    "Nathan Vassell",
+    "Chris McVickar",
+    "John Cambareri",
+    "Hayden Carroll"
   ],
   "customLayoutDirectory": "/Custom_Layouts/"
 }
