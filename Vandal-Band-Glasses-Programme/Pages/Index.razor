@@ -4,10 +4,7 @@
 <p>Working Custom Layout Directory: @workingDiretory</p>
 <p>Number of Rows: @settings.numRows</p>
 <p>Number of Columns: @settings.numColumns</p>
-@foreach(var name in settings.participantList)
-{
-    <p>@name</p>
-}
+<p>@settings.participantList.Count</p>
 
 
 @code {
