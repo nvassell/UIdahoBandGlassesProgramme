@@ -4,10 +4,17 @@
 <p>Working Custom Layout Directory: @workingDiretory</p>
 <p>Number of Rows: @settings.numRows</p>
 <p>Number of Columns: @settings.numColumns</p>
-@foreach (var paricipant in settings.participantList)
-{
-    <p>@paricipant</p>
-}
+
+<MudPaper Width="300px">
+    <MudList Clickable="true">
+        @foreach (var participant in settings.participantList)
+        {
+            <MudListItem Icon="@Icons.Material.Filled.StarRate">
+                @participant 
+            </MudListItem>
+        }
+    </MudList>
+</MudPaper>
 
 
 @code {
