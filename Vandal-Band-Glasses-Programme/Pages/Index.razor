@@ -1,13 +1,20 @@
 ﻿@page "/"
 @inject HttpClient Http
 
+<p>Working Custom Layout Directory: @workingDiretory</p>
+<p>Number of Rows: @settings.numRows</p>
+<p>Number of Columns: @settings.numColumns</p>
 
-<InputFile OnChange="@LoadFiles" multiple />
 
 @code {
-    private void LoadFiles(InputFileChangeEventArgs e)
+    private DefaultLayoutModel settings = new DefaultLayoutModel();
+    private List<CustomLayoutModel> customLayouts = new List<CustomLayoutModel>();
+    private string workingDiretory = "";
+
+    protected override async Task OnInitializedAsync()
     {
-            
+        //settings = await Http.GetJsonAsync<DefaultLayoutModel>("wwwroot/.vbgp/Settings.json");
+        settings = await Http.GetFromJsonAsync<DefaultLayoutModel>(".vbgp/Settings.json");
+        workingDiretory = $"./vbgp{settings.customLayoutDirectory}";
     }
 }
-
