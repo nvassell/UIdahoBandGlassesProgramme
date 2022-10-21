@@ -9,7 +9,7 @@
 
 
 @*Displays the list of participants.*@
-@*<MudPaper Width="300px">
+<MudPaper Width="300px">
     <MudList Clickable="true">
         @foreach (var participant in settings.participantList)
         {
@@ -18,7 +18,7 @@
             </MudListItem>
         }
     </MudList>
-</MudPaper>*@
+</MudPaper>
 <MudButton @onclick="AddToParticipantList" Variant="Variant.Filled">Update Json</MudButton>
 
 
@@ -43,7 +43,8 @@
             participantList = new List<string> { "New List" },
             customLayoutDirectory = "/Custom_Layouts/"
         };
-        test = banana.customLayoutDirectory;
-        await Http.PostAsJsonAsync(".vbgp/Settings.json", banana);
+        //test = JsonSerializer.Serialize(banana);
+        //await Http.PostJsonAsync(".vbgp/Settings2.json", test);
+        await Http.PostAsJsonAsync<DefaultLayoutModel>(".vbgp/Settings2.json", banana);
     }
 }
