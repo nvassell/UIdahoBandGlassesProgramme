@@ -1,37 +1,59 @@
 ﻿@page "/"
 @inject HttpClient Http
+@using MudBlazor
 
 
-<p>Working Custom Layout Directory: @workingDiretory</p>
 <p>Number of Rows: @settings.numRows</p>
 <p>Number of Columns: @settings.numColumns</p>
+<InputFile OnChange="SettingsFileChanged"></InputFile>
 <p>@test</p>
 
 
+@*@foreach(var thing in folders)
+    {
+        <p>@thing</p>
+    }*@
+
+
+
 @*Displays the list of participants.*@
-<MudPaper Width="300px">
-    <MudList Clickable="true">
-        @foreach (var participant in settings.participantList)
-        {
-            <MudListItem Icon="@Icons.Material.Filled.StarRate">
-                @participant
-            </MudListItem>
-        }
-    </MudList>
-</MudPaper>
-<MudButton @onclick="AddToParticipantList" Variant="Variant.Filled">Update Json</MudButton>
+@*<MudPaper Width="300px">
+        <MudList Clickable="true">
+            @foreach (var participant in settings.participantList)
+            {
+                <MudListItem Icon="@Icons.Material.Filled.StarRate">
+                    @participant
+                </MudListItem>
+            }
+        </MudList>
+    </MudPaper>*@
 
 
 
 @code {
     private DefaultLayoutModel? settings = new DefaultLayoutModel();
     private List<CustomLayoutModel> customLayouts = new List<CustomLayoutModel>();
-    private string workingDiretory = "";
-    private string test = "before";
+    private int maxAllowedFiles = int.MaxValue;
+    private long maxFileSize = long.MaxValue;
+    private List<string> fileNames = new();
+    private string test = "";
+
+    private async Task SettingsFileChanged(InputFileChangeEventArgs e)
+    {
+        // Get the file.
+        var file = e.File;
+        // Read that file in a byte array.
+        var buffer = new byte[file.Size];
+        test = await file.OpenReadStream().ReadAsync(buffer);
+        // convert byte array to base 64 string.
+        //test = Convert.ToBase64String(buffer);
+
+    }
 
     protected override async Task OnInitializedAsync()
     {
         settings = await Http.GetFromJsonAsync<DefaultLayoutModel?>(".vbgp/Settings.json");
+
     }
 
     async void AddToParticipantList()
@@ -43,8 +65,6 @@
             participantList = new List<string> { "New List" },
             customLayoutDirectory = "/Custom_Layouts/"
         };
-        //test = JsonSerializer.Serialize(banana);
-        //await Http.PostJsonAsync(".vbgp/Settings2.json", test);
-        await Http.PostAsJsonAsync<DefaultLayoutModel>(".vbgp/Settings2.json", banana);
+        //await Http.PostAsJsonAsync<DefaultLayoutModel>(".vbgp/Settings2.json", banana);
     }
 }
