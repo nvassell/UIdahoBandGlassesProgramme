@@ -1,29 +1,49 @@
 ﻿@page "/"
 @inject HttpClient Http
 
+
 <p>Working Custom Layout Directory: @workingDiretory</p>
 <p>Number of Rows: @settings.numRows</p>
 <p>Number of Columns: @settings.numColumns</p>
+<p>@test</p>
 
-<MudPaper Width="300px">
+
+@*Displays the list of participants.*@
+@*<MudPaper Width="300px">
     <MudList Clickable="true">
         @foreach (var participant in settings.participantList)
         {
             <MudListItem Icon="@Icons.Material.Filled.StarRate">
-                @participant 
+                @participant
             </MudListItem>
         }
     </MudList>
-</MudPaper>
+</MudPaper>*@
+<MudButton @onclick="AddToParticipantList" Variant="Variant.Filled">Update Json</MudButton>
+
 
 
 @code {
     private DefaultLayoutModel? settings = new DefaultLayoutModel();
     private List<CustomLayoutModel> customLayouts = new List<CustomLayoutModel>();
     private string workingDiretory = "";
+    private string test = "before";
 
     protected override async Task OnInitializedAsync()
     {
         settings = await Http.GetFromJsonAsync<DefaultLayoutModel?>(".vbgp/Settings.json");
+    }
+
+    async void AddToParticipantList()
+    {
+        var banana = new DefaultLayoutModel
+        {
+            numRows = 5,
+            numColumns = 5,
+            participantList = new List<string> { "New List" },
+            customLayoutDirectory = "/Custom_Layouts/"
+        };
+        test = banana.customLayoutDirectory;
+        await Http.PostAsJsonAsync(".vbgp/Settings.json", banana);
     }
 }
