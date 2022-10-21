@@ -44,9 +44,9 @@
         var file = e.File;
         // Read that file in a byte array.
         var buffer = new byte[file.Size];
-        test = await file.OpenReadStream().ReadAsync(buffer);
+        await file.OpenReadStream().ReadAsync(buffer);
         // convert byte array to base 64 string.
-        //test = Convert.ToBase64String(buffer);
+        test = Convert.ToBase64String(buffer);
 
     }
 
