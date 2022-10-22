@@ -1,23 +1,26 @@
 ﻿@page "/"
 @inject HttpClient Http
-@using MudBlazor
+@using System.Text.Json
 
+@if(settings is not null)
+{
+    <p>Number of Rows: @settings.numRows</p>
+    <p>Number of Columns: @settings.numColumns</p>
+    <p>Custom Layout Directory: @settings.customLayoutDirectory</p>
+}
 
-<p>Number of Rows: @settings.numRows</p>
-<p>Number of Columns: @settings.numColumns</p>
-<InputFile OnChange="SettingsFileChanged"></InputFile>
-<p>@test</p>
+<InputFile id="fileInput" OnChange="SettingsFileChanged" hidden></InputFile>
 
-
-@*@foreach(var thing in folders)
-    {
-        <p>@thing</p>
-    }*@
-
-
+<MudButton HtmlTag="label"
+           Variant="Variant.Filled"
+           Color="Color.Primary"
+           StartIcon="@Icons.Filled.CloudUpload"
+           for="fileInput">
+    Upload Settings.Json
+</MudButton>
 
 @*Displays the list of participants.*@
-@*<MudPaper Width="300px">
+<MudPaper Width="300px">
         <MudList Clickable="true">
             @foreach (var participant in settings.participantList)
             {
@@ -26,17 +29,13 @@
                 </MudListItem>
             }
         </MudList>
-    </MudPaper>*@
-
+    </MudPaper>
 
 
 @code {
     private DefaultLayoutModel? settings = new DefaultLayoutModel();
     private List<CustomLayoutModel> customLayouts = new List<CustomLayoutModel>();
-    private int maxAllowedFiles = int.MaxValue;
-    private long maxFileSize = long.MaxValue;
-    private List<string> fileNames = new();
-    private string test = "";
+    private string defaultSettingsString = "";
 
     private async Task SettingsFileChanged(InputFileChangeEventArgs e)
     {
@@ -46,25 +45,7 @@
         var buffer = new byte[file.Size];
         await file.OpenReadStream().ReadAsync(buffer);
         // convert byte array to base 64 string.
-        test = Convert.ToBase64String(buffer);
-
-    }
-
-    protected override async Task OnInitializedAsync()
-    {
-        settings = await Http.GetFromJsonAsync<DefaultLayoutModel?>(".vbgp/Settings.json");
-
-    }
-
-    async void AddToParticipantList()
-    {
-        var banana = new DefaultLayoutModel
-        {
-            numRows = 5,
-            numColumns = 5,
-            participantList = new List<string> { "New List" },
-            customLayoutDirectory = "/Custom_Layouts/"
-        };
-        //await Http.PostAsJsonAsync<DefaultLayoutModel>(".vbgp/Settings2.json", banana);
+        defaultSettingsString = Encoding.Default.GetString(buffer);
+        settings = JsonSerializer.Deserialize<DefaultLayoutModel>(defaultSettingsString);
     }
 }
