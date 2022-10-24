@@ -1,14 +1,10 @@
 ﻿@page "/"
 @inject HttpClient Http
+@inject IJSRuntime JS
 @using System.Text.Json
+@using System.IO
 
-@if(settings is not null)
-{
-    <p>Number of Rows: @settings.numRows</p>
-    <p>Number of Columns: @settings.numColumns</p>
-    <p>Custom Layout Directory: @settings.customLayoutDirectory</p>
-}
-
+@*Handles the input for Settings.json*@
 <InputFile id="fileInput" OnChange="SettingsFileChanged" hidden></InputFile>
 
 <MudButton HtmlTag="label"
@@ -19,23 +15,28 @@
     Upload Settings.Json
 </MudButton>
 
-@*Displays the list of participants.*@
-<MudPaper Width="300px">
-        <MudList Clickable="true">
-            @foreach (var participant in settings.participantList)
-            {
-                <MudListItem Icon="@Icons.Material.Filled.StarRate">
-                    @participant
-                </MudListItem>
-            }
-        </MudList>
-    </MudPaper>
+@*Shows the List of participants*@
+@if (settings.participantList.Count > 0)
+{
+    <MudItem xs="12" md="6">
+        <MudPaper Width="100%">
+            <MudList Clickable="true" Dense="true">
+                @foreach (var participant in settings.participantList)
+                {
+                    <MudListItem Text="@participant" OnClick="() => settings.participantList.Remove(participant)"/>
+                }
+            </MudList>
+        </MudPaper>
+    </MudItem>
+}
+ <p>@defaultSettingsString</p>
 
 
 @code {
     private DefaultLayoutModel? settings = new DefaultLayoutModel();
     private List<CustomLayoutModel> customLayouts = new List<CustomLayoutModel>();
     private string defaultSettingsString = "";
+    MudListItem selectedParticipant;
 
     private async Task SettingsFileChanged(InputFileChangeEventArgs e)
     {
