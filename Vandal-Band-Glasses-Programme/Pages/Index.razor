@@ -1,6 +1,6 @@
 ﻿@page "/"
 @inject HttpClient Http
-@inject IJSRuntime JS
+@inject IJSRuntime JSRuntime
 @using System.Text.Json
 @using System.IO
 
@@ -15,28 +15,18 @@
     Upload Settings.Json
 </MudButton>
 
-@*Shows the List of participants*@
-@if (settings.participantList.Count > 0)
-{
-    <MudItem xs="12" md="6">
-        <MudPaper Width="100%">
-            <MudList Clickable="true" Dense="true">
-                @foreach (var participant in settings.participantList)
-                {
-                    <MudListItem Text="@participant" OnClick="() => settings.participantList.Remove(participant)"/>
-                }
-            </MudList>
-        </MudPaper>
-    </MudItem>
-}
- <p>@defaultSettingsString</p>
+@*<ParticipantTable participants="settings.participantList" />*@
 
+@*<p>@defaultSettingsString</p>*@
+
+<textarea @bind="fileContent" style="width:150px;height:100px;"/>
+<button @onclick="saveFile">Save File</button>
+<button @onclick="DownloadFile">Download File</button>
 
 @code {
     private DefaultLayoutModel? settings = new DefaultLayoutModel();
     private List<CustomLayoutModel> customLayouts = new List<CustomLayoutModel>();
     private string defaultSettingsString = "";
-    MudListItem selectedParticipant;
 
     private async Task SettingsFileChanged(InputFileChangeEventArgs e)
     {

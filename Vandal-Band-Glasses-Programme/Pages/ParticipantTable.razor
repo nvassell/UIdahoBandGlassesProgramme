@@ -1,0 +1,20 @@
+﻿<h3>Party</h3>
+@if (participants.Count > 0)
+{
+    <MudItem xs="12" md="6">
+        <MudPaper Width="100%">
+            <MudList Clickable="true" Dense="true">
+                @foreach (var participant in participants)
+                {
+                    <MudListItem Text="@participant" OnClick="() => participants.Remove(participant)" />
+                }
+            </MudList>
+        </MudPaper>
+    </MudItem>
+}
+
+@code {
+    [Parameter]
+    public List<string> participants { get; set; } = new();
+}
+
