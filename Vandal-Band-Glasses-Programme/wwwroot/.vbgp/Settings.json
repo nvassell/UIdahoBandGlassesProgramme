@@ -1,13 +1,9 @@
 ﻿{
-  "numRows": 10,
-  "numColumns": 10,
+  "numRows": 2,
+  "numColumns": 2,
   "participantList": [
     "Joe Vandal",
-    "Joeleen Vandal",
-    "Nathan Vassell",
-    "Chris McVickar",
-    "John Cambareri",
-    "Hayden Carroll"
+    "Joeleen Vandal"
   ],
   "customLayoutDirectory": "/Custom_Layouts/"
 }
