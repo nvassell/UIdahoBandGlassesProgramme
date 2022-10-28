@@ -4,40 +4,30 @@
 @using System.Text.Json
 @using System.IO
 
-<MudGrid>
-    <MudItem xs="6">
-        <ParticipantTable participants="settings.participantList" />
-        <MudButton HtmlTag="label"
-                   Variant="Variant.Filled"
-                   Color="Color.Primary"
-                   StartIcon="@Icons.Filled.CloudUpload"
-                   for="fileInput">
-            Upload Settings.Json
-        </MudButton>
-        <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="GetDefaultSettingsFile">Get Default Settings.Json</MudButton>
-        <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="GetSettingsString">Get Settings String</MudButton>
-        <p>@settingsString</p>
-        <p>@NewParticipant</p>
+@*Handles the input for Settings.json*@
+<InputFile id="fileInput" OnChange="SettingsFileChanged" hidden></InputFile>
 
+<MudButton HtmlTag="label"
+           Variant="Variant.Filled"
+           Color="Color.Primary"
+           StartIcon="@Icons.Filled.CloudUpload"
+           for="fileInput">
+    Upload Settings.Json
+</MudButton>
 
-        @*Handles the input for Settings.json*@
-        <InputFile id="fileInput" OnChange="SettingsFileChanged" hidden></InputFile>
-    </MudItem>
-    <MudItem xs="6">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc efficitur ex at bibendum iaculis. Sed et metus tristique, consectetur turpis vitae, accumsan mi. Curabitur tincidunt porta accumsan. Etiam feugiat faucibus rhoncus. Nullam at eros nisi. Nam tincidunt, quam et maximus ullamcorper, lorem lacus scelerisque felis, sit amet faucibus arcu mi at nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum scelerisque porta velit, at dignissim nisi finibus et. Nullam facilisis eleifend tortor, nec hendrerit ligula lobortis et. Aliquam varius urna nec leo aliquam, sit amet aliquet quam dignissim. Aliquam erat volutpat. Ut tristique feugiat massa condimentum sodales. </p>
-    </MudItem>
-</MudGrid>
+@*<ParticipantTable participants="settings.participantList" />*@
 
+@*<p>@defaultSettingsString</p>*@
 
+<textarea @bind="fileContent" style="width:150px;height:100px;"/>
+<button @onclick="saveFile">Save File</button>
+<button @onclick="DownloadFile">Download File</button>
 
 @code {
     private DefaultLayoutModel? settings = new DefaultLayoutModel();
     private List<CustomLayoutModel> customLayouts = new List<CustomLayoutModel>();
-    private string settingsString = "";
     private string defaultSettingsString = "";
 
-
-    // Gets the settings from the custom file.
     private async Task SettingsFileChanged(InputFileChangeEventArgs e)
     {
         // Get the file.
@@ -49,16 +39,4 @@
         defaultSettingsString = Encoding.Default.GetString(buffer);
         settings = JsonSerializer.Deserialize<DefaultLayoutModel>(defaultSettingsString);
     }
-
-    // Gets the settings from the default file.
-    private async Task GetDefaultSettingsFile()
-    {
-        settings = await Http.GetFromJsonAsync<DefaultLayoutModel>(".vbgp/Settings.json");
-    }
-
-    private async Task GetSettingsString()
-    {
-        settingsString = JsonSerializer.Serialize(settings);
-    }
-
 }
