@@ -9,18 +9,27 @@
                     <MudListItem Text="@participant" OnClick="() => participants.Remove(participant)" />
                 }
             </MudList>
+
+        </MudPaper>
+    </MudItem>
+
+    <MudItem xs="12" md="6">
+        <MudPaper Width="100%">
+            <MudForm @ref="form">
+                <MudTextField T="string" Label="New Participant" @bind-Value="newParticipant" For="@(() => newParticipant)" Required="true" RequiredError="Name required!" />
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true" OnClick="() => participants.Add(newParticipant)">Add</MudButton>
+            </MudForm>
         </MudPaper>
     </MudItem>
 }
+<p>@newParticipant</p>
 
 @code {
     [Parameter]
     public List<string> participants { get; set; } = new();
+    public string newParticipant = "";
 
-    private void RemoveParticipant(string person)
-    {
-        participants.Remove(person);
-    }
+    MudForm form;
 
 }
 
