@@ -1,8 +1,5 @@
 ﻿@page "/"
 @inject HttpClient Http
-@inject IJSRuntime JSRuntime
-@using System.Text.Json
-@using System.IO
 
 <MudGrid>
     <MudItem xs="6">
@@ -59,4 +56,4 @@
     {
         settingsString = JsonSerializer.Serialize(settings);
     }
-}xxxx
+}

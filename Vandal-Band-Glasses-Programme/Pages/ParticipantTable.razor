@@ -16,5 +16,11 @@
 @code {
     [Parameter]
     public List<string> participants { get; set; } = new();
+
+    private void RemoveParticipant(string person)
+    {
+        participants.Remove(person);
+    }
+
 }
 
