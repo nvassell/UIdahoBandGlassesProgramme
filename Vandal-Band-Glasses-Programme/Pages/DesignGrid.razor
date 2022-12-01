@@ -39,12 +39,6 @@
 <MudColorPicker DisableToolbar="false" Label="Participant Color Picker" @bind-Text="colorValue" PickerVariant="PickerVariant.Inline" DisableAlpha="true" />
 <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="UpdateColor">UpdateColor</MudButton>
 
-@*@foreach(var item in items)
-{
-    <p>@item.Name</p>
-    <p>@item.Initials</p>
-    <p>@item.Color</p>
-}*@
 
 <p>@customLayoutJsonString</p>
 
@@ -87,7 +81,7 @@
         var maxRows = settingsFile.numRows;
         int colsCount = 0;
         int rowsCount = 0;
-
+        items.Clear();
         foreach(var participant in settingsFile.participantList)
         {
             var initials = GetInitials(participant);

@@ -45,6 +45,7 @@
         // convert byte array to base 64 string.
         defaultSettingsString = Encoding.Default.GetString(buffer);
         settings = JsonSerializer.Deserialize<DefaultLayoutModel>(defaultSettingsString);
+        var test = 0;
     }
 
     // Gets the settings from the default file.
