@@ -1,4 +1,5 @@
-﻿@if(items.Count != 0)
+﻿@using System;
+@if(items.Count != 0)
 {
     <MudDropContainer T="DropItem" Items="items" CanDropClass="mud-border-info" NoDropClass="mud-border-error" CanDrop="@( (item,identifier ) => items.Count(x => x.Identifier == identifier ) == 0)" ItemsSelector="@((item,dropzone) => item.Identifier == dropzone)" ItemDropped="ItemUpdated" Class="border-2 border-solid mud-border-lines-default">
         <ChildContent>
@@ -18,7 +19,7 @@
             <div class="d-flex justify-center align-center flex-grow-1">
                 <div class="pa-4 my-4" Style="@($"color:#000000; background:{context.Color};")">
                     <p>
-                        @context.Name
+                        @context.Initials
                     </p>
                 </div>
                 @*<MudIcon Size="Size.Large" Color=Color.Primary>@context.Name</MudIcon>*@
@@ -28,21 +29,51 @@
 }
 <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="AddParticipantsToGrid">Add Participants to Grid</MudButton>
 <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="ClearParticipantsGrid">Clear Grid</MudButton>
+<MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SaveCustomGrid">Save Grid</MudButton>
+<MudSelect T="string" Label="Change Participant Color" AnchorOrigin="Origin.BottomCenter" @bind-Value="selectedColorParticipant">
+    @foreach (var participant in settingsFile.participantList)
+    {
+        <MudSelectItem Value="@participant" />
+    }
+</MudSelect>
+<MudColorPicker DisableToolbar="false" Label="Participant Color Picker" @bind-Text="colorValue" PickerVariant="PickerVariant.Inline" DisableAlpha="true" />
+<MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="UpdateColor">UpdateColor</MudButton>
+
+@*@foreach(var item in items)
+{
+    <p>@item.Name</p>
+    <p>@item.Initials</p>
+    <p>@item.Color</p>
+}*@
+
+<p>@customLayoutJsonString</p>
+
+
+
 
 
 @code {
     [Parameter]
     public DefaultLayoutModel settingsFile { get; set; } = new DefaultLayoutModel();
 
-    public List<DropItem> items { get; set; } = new();
-    private MudTheme Theme = new MudTheme();
+    public CustomLayoutModel customLayout = new CustomLayoutModel()
+        {
+            layoutDetails = new()
+        };
 
+
+    private string customLayoutJsonString = "";
+
+    public List<DropItem> items { get; set; } = new();
+    private string colorValue = "";
+    private string selectedColorParticipant = "";
 
     public class DropItem
     {
-        public string Identifier { get; set; }
+        public string Initials { get; set; }
         public string Name { get; set; }
-        public string Color { get; set; } = "#E91E63";
+        public string Identifier { get; set; }
+        public string Color { get; set; } = "#FFFFFF";
     }
 
     private void ItemUpdated(MudItemDropInfo<DropItem> dropItem)
@@ -59,14 +90,14 @@
 
         foreach(var participant in settingsFile.participantList)
         {
-            items.Add(new DropItem() { Name = participant, Identifier = $"{rowsCount}{colsCount}"});
+            var initials = GetInitials(participant);
+            items.Add(new DropItem() { Initials = initials, Name = participant ,Identifier = $"{rowsCount}{colsCount}" });
             colsCount++;
             if (colsCount == maxCols)
             {
                 colsCount = 0;
                 rowsCount++;
             }
-
         }
     }
 
@@ -74,54 +105,40 @@
     {
         items.Clear();
     }
-}
-@*@code {
-        private void ItemUpdated(MudItemDropInfo<DropItem> dropItem)
-        {
-            dropItem.Item.Identifier = dropItem.DropzoneIdentifier;
-        }
 
-        private List<DropItem> _items = new()
+    private void SaveCustomGrid()
     {
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessRook, Color = Color.Primary, Identifier = "00" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessKnight, Color = Color.Primary, Identifier = "01" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessBishop, Color = Color.Primary, Identifier = "02" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessQueen, Color = Color.Primary, Identifier = "03" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessKing, Color = Color.Primary, Identifier = "04" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessBishop, Color = Color.Primary, Identifier = "05" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessKnight, Color = Color.Primary, Identifier = "06" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessRook, Color = Color.Primary, Identifier = "07" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessPawn, Color = Color.Primary, Identifier = "10" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessPawn, Color = Color.Primary, Identifier = "11" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessPawn, Color = Color.Primary, Identifier = "12" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessPawn, Color = Color.Primary, Identifier = "13" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessPawn, Color = Color.Primary, Identifier = "14" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessPawn, Color = Color.Primary, Identifier = "15" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessPawn, Color = Color.Primary, Identifier = "16" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessPawn, Color = Color.Primary, Identifier = "17" },
-
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessPawn, Color = Color.Secondary, Identifier = "60" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessPawn, Color = Color.Secondary, Identifier = "61" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessPawn, Color = Color.Secondary, Identifier = "62" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessPawn, Color = Color.Secondary, Identifier = "63" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessPawn, Color = Color.Secondary, Identifier = "64" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessPawn, Color = Color.Secondary, Identifier = "65" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessPawn, Color = Color.Secondary, Identifier = "66" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessPawn, Color = Color.Secondary, Identifier = "67" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessRook, Color = Color.Secondary, Identifier = "70" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessKnight, Color = Color.Secondary, Identifier = "71" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessBishop, Color = Color.Secondary, Identifier = "72" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessQueen, Color = Color.Secondary, Identifier = "73" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessKing, Color = Color.Secondary, Identifier = "74" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessBishop, Color = Color.Secondary, Identifier = "75" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessKnight, Color = Color.Secondary, Identifier = "76" },
-            new DropItem(){ Icon = @Icons.Custom.Uncategorized.ChessRook, Color = Color.Secondary, Identifier = "77" },
-        };
-
-        public class DropItem
+        customLayout.layoutDetails.Clear();
+        customLayoutJsonString = "";
+        foreach (var item in items) 
         {
-            public string Icon { get; init; }
-            public Color Color { get; init; }
-            public string Identifier { get; set; }
+            var positionX = Int32.Parse(item.Identifier.Substring(0, 1));
+            var positionY = Int32.Parse(item.Identifier.Substring(1, 1));
+
+            customLayout.layoutDetails.Add(new LayoutDetail() { participant = item.Name, color = item.Color, xPos = positionX, yPos = positionY });
         }
-    }*@
+        customLayoutJsonString = JsonSerializer.Serialize(customLayout);
+
+    }
+
+    private void UpdateColor()
+    {
+
+        int index = items.FindIndex(item => item.Name == selectedColorParticipant);
+        items[index].Color = colorValue;
+    }
+
+    static string GetInitials(string name)
+    {
+        string[] nameSplit = name.Split(new string[] { ",", " " }, StringSplitOptions.RemoveEmptyEntries);
+
+        string initials = "";
+
+        foreach (string item in nameSplit)
+        {
+            initials += item.Substring(0, 1).ToUpper();
+        }
+
+        return initials;
+    }
+}
