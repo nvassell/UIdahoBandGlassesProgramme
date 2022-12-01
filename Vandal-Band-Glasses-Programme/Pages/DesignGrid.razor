@@ -1,10 +1,12 @@
-﻿@*<MudDropContainer T="DropItem" Items="_items" CanDropClass="mud-border-info" NoDropClass="mud-border-error" CanDrop="@( (item,identifier ) => _items.Count(x => x.Identifier == identifier ) == 0)" ItemsSelector="@((item,dropzone) => item.Identifier == dropzone)" ItemDropped="ItemUpdated" Class="border-2 border-solid mud-border-lines-default">
+﻿@if(items.Count != 0)
+{
+    <MudDropContainer T="DropItem" Items="items" CanDropClass="mud-border-info" NoDropClass="mud-border-error" CanDrop="@( (item,identifier ) => items.Count(x => x.Identifier == identifier ) == 0)" ItemsSelector="@((item,dropzone) => item.Identifier == dropzone)" ItemDropped="ItemUpdated" Class="border-2 border-solid mud-border-lines-default">
         <ChildContent>
-            @for (int r = 0; r < 8; r++)
+            @for (int r = 0; r < settingsFile.numRows; r++)
             {
                 var row = r.ToString();
                 <div class="d-flex">
-                    @for (int c = 0; c < 8; c++)
+                    @for (int c = 0; c < settingsFile.numColumns; c++)
                     {
                         var col = c.ToString();
                         <MudDropZone T="DropItem" Identifier="@($"{row}{col}")" DraggingClass="mud-theme-success" Class="d-flex justify-center align-center border-2 border-solid docs-gray-bg mud-border-lines-default" Style="height:64px;width:64px;" />
@@ -14,46 +16,64 @@
         </ChildContent>
         <ItemRenderer>
             <div class="d-flex justify-center align-center flex-grow-1">
-                <MudIcon Icon="@context.Icon" Color="@context.Color" Size="Size.Large" />
+                <div class="pa-4 my-4" Style="@($"color:#000000; background:{context.Color};")">
+                    <p>
+                        @context.Name
+                    </p>
+                </div>
+                @*<MudIcon Size="Size.Large" Color=Color.Primary>@context.Name</MudIcon>*@
             </div>
         </ItemRenderer>
-    </MudDropContainer>*@
-    @*<MudDropContainer T="DropItem" Items="_items" CanDropClass="mud-border-info" NoDropClass="mud-border-error" CanDrop="@( (item,identifier ) => _items.Count(x => x.name == identifier ) == 0)" ItemsSelector="@((item,dropzone) => item.name == dropzone)" ItemDropped="ItemUpdated" Class="border-2 border-solid mud-border-lines-default">
-        <ChildContent>
-            @for (int r = 0; r < numRows; r++)
-            {
-                var row = r.ToString();
-                <div class="d-flex">
-                    @for (int c = 0; c < numCols; c++)
-                    {
-                        var col = c.ToString();
-                        <MudDropZone T="DropItem" Identifier="@($"{row}{col}")" DraggingClass="mud-theme-success" Class="d-flex justify-center align-center border-2 border-solid docs-gray-bg mud-border-lines-default" Style="height:64px;width:64px;" />
-                    }
-                </div>
-            }
-        </ChildContent>
-    </MudDropContainer>*@
+    </MudDropContainer>
+}
+<MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="AddParticipantsToGrid">Add Participants to Grid</MudButton>
+<MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="ClearParticipantsGrid">Clear Grid</MudButton>
+
 
 @code {
     [Parameter]
-    public int numRows { get; set; } = 0;
+    public DefaultLayoutModel settingsFile { get; set; } = new DefaultLayoutModel();
 
-    [Parameter]
-    public int numCols { get; set; } = 0;
+    public List<DropItem> items { get; set; } = new();
+    private MudTheme Theme = new MudTheme();
 
-    //private List<DropItem> _items = new();
 
-    //public class DropItem
-    //{
-    //    public string name { get; set; } = "";
-    //    public Color color { get; set; }
-    //}
+    public class DropItem
+    {
+        public string Identifier { get; set; }
+        public string Name { get; set; }
+        public string Color { get; set; } = "#E91E63";
+    }
 
-    //private void ItemUpdated(MudItemDropInfo<DropItem> dropItem)
-    //{
-    //    dropItem.Item.name = dropItem.DropzoneIdentifier;
-    //}
+    private void ItemUpdated(MudItemDropInfo<DropItem> dropItem)
+    {
+        dropItem.Item.Identifier = dropItem.DropzoneIdentifier;
+    }
 
+    private void AddParticipantsToGrid()
+    {
+        var maxCols = settingsFile.numColumns;
+        var maxRows = settingsFile.numRows;
+        int colsCount = 0;
+        int rowsCount = 0;
+
+        foreach(var participant in settingsFile.participantList)
+        {
+            items.Add(new DropItem() { Name = participant, Identifier = $"{rowsCount}{colsCount}"});
+            colsCount++;
+            if (colsCount == maxCols)
+            {
+                colsCount = 0;
+                rowsCount++;
+            }
+
+        }
+    }
+
+    private void ClearParticipantsGrid()
+    {
+        items.Clear();
+    }
 }
 @*@code {
         private void ItemUpdated(MudItemDropInfo<DropItem> dropItem)

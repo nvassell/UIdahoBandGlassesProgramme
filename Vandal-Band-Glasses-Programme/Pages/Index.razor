@@ -13,19 +13,16 @@
         </MudButton>
         <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="GetDefaultSettingsFile">Get Default Settings.Json</MudButton>
         <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="GetSettingsString">Get Settings String</MudButton>
+
         <p>@settingsString</p>
 
 
         @*Handles the input for Settings.json*@
         <InputFile id="fileInput" OnChange="SettingsFileChanged" hidden></InputFile>
     </MudItem>
-    @if (settings.numRows != 0 && settings.numColumns != 0)
-    {
-        <MudItem xs="6">
-            <DesignGrid numRows="settings.numRows" numcols="settings.numCols" />
-        </MudItem>
-    }
-
+    <MudItem xs="6">
+        <DesignGrid settingsFile="settings"/>
+    </MudItem>
 </MudGrid>
 
 
