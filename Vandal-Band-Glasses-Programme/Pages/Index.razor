@@ -19,9 +19,13 @@
         @*Handles the input for Settings.json*@
         <InputFile id="fileInput" OnChange="SettingsFileChanged" hidden></InputFile>
     </MudItem>
-    <MudItem xs="6">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc efficitur ex at bibendum iaculis. Sed et metus tristique, consectetur turpis vitae, accumsan mi. Curabitur tincidunt porta accumsan. Etiam feugiat faucibus rhoncus. Nullam at eros nisi. Nam tincidunt, quam et maximus ullamcorper, lorem lacus scelerisque felis, sit amet faucibus arcu mi at nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum scelerisque porta velit, at dignissim nisi finibus et. Nullam facilisis eleifend tortor, nec hendrerit ligula lobortis et. Aliquam varius urna nec leo aliquam, sit amet aliquet quam dignissim. Aliquam erat volutpat. Ut tristique feugiat massa condimentum sodales. </p>
-    </MudItem>
+    @if (settings.numRows != 0 && settings.numColumns != 0)
+    {
+        <MudItem xs="6">
+            <DesignGrid numRows="settings.numRows" numcols="settings.numCols" />
+        </MudItem>
+    }
+
 </MudGrid>
 
 
