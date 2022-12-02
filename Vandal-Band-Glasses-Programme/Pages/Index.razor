@@ -3,6 +3,7 @@
 
 <MudGrid>
     <MudItem xs="6">
+        @*<ParticipantTable participants="settings.participantList" />*@
         <ParticipantTable participants="settings.participantList" />
         <MudButton HtmlTag="label"
                    Variant="Variant.Filled"
@@ -11,8 +12,8 @@
                    for="fileInput">
             Upload Settings.Json
         </MudButton>
-        <MudButton Variant="Variant.Filled" 
-                   Color="Color.Secondary" 
+        <MudButton Variant="Variant.Filled"
+                   Color="Color.Secondary"
                    OnClick="GetDefaultSettingsFile">
             Get Default Settings.Json
         </MudButton>
@@ -36,7 +37,6 @@
     private List<CustomLayoutModel> customLayouts = new List<CustomLayoutModel>();
     private string settingsString = "";
     private string defaultSettingsString = "";
-
 
     // Gets the settings from the custom file.
     private async Task SettingsFileChanged(InputFileChangeEventArgs e)

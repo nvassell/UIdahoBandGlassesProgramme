@@ -1,7 +1,13 @@
 ﻿public class DefaultLayoutModel
 {
-    public List<string> participantList { get; init; } = new List<string>();
-    public int numRows { get; init; } = 0;
-    public int numColumns { get; init; } = 0;
-    public string customLayoutDirectory { get; init; } = "/Custom_Layouts/";
+    public string customLayoutDirectory { get; set; } = "/Custom_Layouts/";
+    public int numRows { get; set; } = 0;
+    public int numColumns { get; set; } = 0;
+    public List<ParticipantModel> participantList { get; set; } = new();
+}
+
+public class ParticipantModel
+{
+    public string name { get; set; } = "John Smith";
+    public int glassesNumber { get; set; } = 0;
 }

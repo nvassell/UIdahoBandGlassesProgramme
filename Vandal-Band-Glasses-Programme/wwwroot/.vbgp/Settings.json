@@ -1,19 +1,15 @@
 ﻿{
-  "numRows": 16,
-  "numColumns": 16,
+  "customLayoutDirectory": "/Custom_Layouts/",
+  "numRows": 10,
+  "numColumns": 10,
   "participantList": [
-    "Joe Vandal",
-    "Joeleen Vandal",
-    "Nathan Vassell",
-    "Chris McVickar",
-    "John Cambareri",
-    "Hayden Carroll",
-    "Mike Persons",
-    "Yolanda Smith",
-    "Evan Evans",
-    "Doo Doo",
-    "Another Person",
-    "Last Person"
-  ],
-  "customLayoutDirectory": "/Custom_Layouts/"
+    {
+      "name": "Nathan Vassell",
+      "glassesNumber": 1
+    },
+    {
+      "name": "Joe Vandal",
+      "glassesNumber": 2
+    }
+  ]
 }

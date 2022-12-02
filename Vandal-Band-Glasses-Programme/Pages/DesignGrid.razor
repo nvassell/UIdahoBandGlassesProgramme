@@ -10,7 +10,7 @@
                     @for (int c = 0; c < settingsFile.numColumns; c++)
                     {
                         var col = c.ToString();
-                        <MudDropZone T="DropItem" Identifier="@($"{row}{col}")" DraggingClass="mud-theme-success" Class="d-flex justify-center align-center border-2 border-solid docs-gray-bg mud-border-lines-default" Style="height:64px;width:64px;" />
+                        <MudDropZone T="DropItem" Identifier="@($"{row}{col}")" DraggingClass="mud-theme-success" Class="d-flex justify-center align-center border-2 border-solid docs-gray-bg mud-border-lines-default" Style="height:70px;width:70px;" />
                     }
                 </div>
             }
@@ -19,31 +19,24 @@
             <div class="d-flex justify-center align-center flex-grow-1">
                 <div class="pa-4 my-4" Style="@($"color:#000000; background:{context.Color};")">
                     <p>
-                        @context.Initials
+                        @(context.Initials + " - " + context.GlassesNumber)
                     </p>
                 </div>
-                @*<MudIcon Size="Size.Large" Color=Color.Primary>@context.Name</MudIcon>*@
             </div>
         </ItemRenderer>
     </MudDropContainer>
 }
 <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="AddParticipantsToGrid">Add Participants to Grid</MudButton>
-<MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="ClearParticipantsGrid">Clear Grid</MudButton>
 <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SaveCustomGrid">Save Grid</MudButton>
 <MudSelect T="string" Label="Change Participant Color" AnchorOrigin="Origin.BottomCenter" @bind-Value="selectedColorParticipant">
     @foreach (var participant in settingsFile.participantList)
     {
-        <MudSelectItem Value="@participant" />
+        <MudSelectItem Value="@participant.name" />
     }
 </MudSelect>
 <MudColorPicker DisableToolbar="false" Label="Participant Color Picker" @bind-Text="colorValue" PickerVariant="PickerVariant.Inline" DisableAlpha="true" />
 <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="UpdateColor">UpdateColor</MudButton>
-
-
 <p>@customLayoutJsonString</p>
-
-
-
 
 
 @code {
@@ -51,9 +44,9 @@
     public DefaultLayoutModel settingsFile { get; set; } = new DefaultLayoutModel();
 
     public CustomLayoutModel customLayout = new CustomLayoutModel()
-        {
-            layoutDetails = new()
-        };
+    {
+        layoutDetails = new()
+    };
 
 
     private string customLayoutJsonString = "";
@@ -64,9 +57,10 @@
 
     public class DropItem
     {
-        public string Initials { get; set; }
-        public string Name { get; set; }
-        public string Identifier { get; set; }
+        public string Initials { get; set; } = "XX";
+        public string Name { get; set; } = "John Smith";
+        public int GlassesNumber { get; set; } = 0;
+        public string Identifier { get; set; } = "00";
         public string Color { get; set; } = "#FFFFFF";
     }
 
@@ -81,12 +75,22 @@
         var maxRows = settingsFile.numRows;
         int colsCount = 0;
         int rowsCount = 0;
+        customLayout.layoutDetails.Clear();
         items.Clear();
-        foreach(var participant in settingsFile.participantList)
+        foreach (var participant in settingsFile.participantList)
         {
-            var initials = GetInitials(participant);
-            items.Add(new DropItem() { Initials = initials, Name = participant ,Identifier = $"{rowsCount}{colsCount}" });
+            var initials = GetInitials(participant.name);
+            items.Add(
+                new DropItem()
+                {
+                    Initials = initials,
+                    Name = participant.name,
+                    GlassesNumber = participant.glassesNumber,
+                    Identifier = $"{rowsCount}{colsCount}"
+                });
+
             colsCount++;
+
             if (colsCount == maxCols)
             {
                 colsCount = 0;
@@ -95,21 +99,16 @@
         }
     }
 
-    private void ClearParticipantsGrid()
-    {
-        items.Clear();
-    }
-
     private void SaveCustomGrid()
     {
         customLayout.layoutDetails.Clear();
         customLayoutJsonString = "";
-        foreach (var item in items) 
+        foreach (var item in items)
         {
             var positionX = Int32.Parse(item.Identifier.Substring(0, 1));
             var positionY = Int32.Parse(item.Identifier.Substring(1, 1));
 
-            customLayout.layoutDetails.Add(new LayoutDetail() { participant = item.Name, color = item.Color, xPos = positionX, yPos = positionY });
+            customLayout.layoutDetails.Add(new LayoutDetail() { participant = item.Name, glassesNumber = item.GlassesNumber, color = item.Color, xPos = positionX, yPos = positionY });
         }
         customLayoutJsonString = JsonSerializer.Serialize(customLayout);
 
@@ -117,10 +116,18 @@
 
     private void UpdateColor()
     {
-
         int index = items.FindIndex(item => item.Name == selectedColorParticipant);
         items[index].Color = colorValue;
     }
+
+    //private void ClearParticipantsGrid()
+    //{
+    //    items.Clear();
+    //}
+
+
+
+
 
     static string GetInitials(string name)
     {

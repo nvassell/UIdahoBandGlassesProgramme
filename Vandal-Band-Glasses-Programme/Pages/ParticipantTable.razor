@@ -1,23 +1,34 @@
-﻿<h3>Party</h3>
-@if (participants.Count > 0)
+﻿@if (participants.Count > 0)
 {
-    <MudItem xs="12" md="6">
+    <MudItem xs="6" md="3">
         <MudPaper Width="100%">
             <MudList Clickable="true" Dense="true">
                 @foreach (var participant in participants)
                 {
-                    <MudListItem Text="@participant" OnClick="() => participants.Remove(participant)" />
+                    <MudListItem Text="@(participant.name + " - " + participant.glassesNumber)" OnClick="() => participants.Remove(participant)" />
                 }
             </MudList>
-
         </MudPaper>
     </MudItem>
-
     <MudItem xs="12" md="6">
         <MudPaper Width="100%">
-            <MudForm @ref="form">
+            <MudForm @ref="newParticipantForm">
                 <MudTextField T="string" Label="New Participant" @bind-Value="newParticipant" For="@(() => newParticipant)" Required="true" RequiredError="Name required!" />
-                <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true" OnClick="() => participants.Add(newParticipant)">Add</MudButton>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true" OnClick="AddParticipant">Add</MudButton>
+            </MudForm>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" md="6">
+        <MudPaper Width="100%">
+            <MudForm @ref="editGlassesForm">
+                <MudSelect T="string" Label="Edit Participant" AnchorOrigin="Origin.BottomCenter" @bind-Value="selectedParticipant" Required="true" RequiredError="Select member!">
+                    @foreach (var participant in participants)
+                    {
+                        <MudSelectItem Value="@participant.name" />
+                    }
+                </MudSelect>
+                <MudTextField T="int" Label="New Glasses Number" @bind-Value="newGlassesNumber" For="@(() => newGlassesNumber)" Required="true" RequiredError="New number required!" />
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true" OnClick="EditGlasses">Edit Number.</MudButton>
             </MudForm>
         </MudPaper>
     </MudItem>
@@ -25,9 +36,33 @@
 
 @code {
     [Parameter]
-    public List<string> participants { get; set; } = new();
-    public string newParticipant = "";
+    public List<ParticipantModel> participants { get; set; } = new();
 
-    MudForm form;
+    public string newParticipant = "";
+    public int newGlassesNumber = 0;
+
+    public string selectedParticipant = "";
+    MudForm newParticipantForm;
+    MudForm editGlassesForm;
+
+    public void AddParticipant()
+    {
+        if(newParticipant != "")
+        {
+            participants.Add(new ParticipantModel() { name = newParticipant, glassesNumber = participants.Count() + 1 });
+            newParticipant = "";
+            newGlassesNumber = 0;
+        }
+
+    }
+
+    public void EditGlasses()
+    {
+        int index = participants.FindIndex(p => p.name == selectedParticipant);
+        if (index != -1)
+        {
+            participants[index].glassesNumber = newGlassesNumber;
+        }
+    }
 }
 
