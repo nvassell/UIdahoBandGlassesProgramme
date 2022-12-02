@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.FileProviders;
 using MudBlazor.Services;
 using Vandal_Band_Glasses_Programme;
 

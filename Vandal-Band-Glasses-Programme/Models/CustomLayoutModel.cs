@@ -1,7 +1,7 @@
 ﻿public class CustomLayoutModel
 {
     public List<LayoutDetail>? layoutDetails { get; init; }
-}   
+}
 
 public class LayoutDetail
 {
